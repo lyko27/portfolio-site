@@ -1,0 +1,200 @@
+---
+import { skills } from '../data/portfolio.js';
+import { useTranslations } from '../i18n/ui.js';
+
+const { lang = 'fr' } = Astro.props;
+const t = useTranslations(lang);
+
+const getTextColor = (level) => {
+    if (level >= 90) return 'text-emerald-400';
+    if (level >= 75) return 'text-blue-400';
+    if (level >= 50) return 'text-yellow-400';
+    return 'text-orange-400';
+}
+const getBgColor = (level) => {
+    if (level >= 90) return 'bg-emerald-400';
+    if (level >= 75) return 'bg-blue-400';
+    if (level >= 50) return 'bg-yellow-400';
+    return 'bg-orange-400';
+}
+const getSkillLabel = (level) => {
+  if (level >= 90) return t('skills.lvl.expert');
+  if (level >= 75) return t('skills.lvl.advanced');
+  if (level >= 50) return t('skills.lvl.intermediate');
+  return t('skills.lvl.beginner');
+};
+---
+
+<section 
+    id="skills" 
+    class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden min-h-screen flex flex-col justify-center bg-[#1e3a8a]"
+>
+      <div 
+        class="absolute inset-0 pointer-events-none opacity-30"
+        style="background-image: linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px); background-size: 40px 40px;"
+      >
+      </div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,25,65,0.6)_100%)] pointer-events-none"></div>
+
+      <div 
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[98%] h-[92%] max-w-7xl border border-white/20 bg-white/5 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)] pointer-events-none z-0 rounded-sm"
+      >
+          <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-white/30"></div>
+          <div class="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-white/30"></div>
+          <div class="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-white/30"></div>
+          <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-white/30"></div>
+      </div>
+      
+      <div class="max-w-6xl mx-auto relative z-10 w-full">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div>
+            <h2 class="text-blue-300 font-bold tracking-[0.2em] text-xs uppercase mb-2">{t('skills.badge')}</h2>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">{t('skills.title')}</h1>
+          </div>
+
+          <button 
+            id="mastery-toggle" 
+            class="group flex items-center gap-4 pl-6 pr-2 py-2 rounded-full bg-[#161e2b] border border-blue-500/30 hover:border-blue-400 transition-all cursor-pointer z-20"
+          >
+            <span class="text-xs font-bold text-blue-100 group-hover:text-white transition-colors uppercase tracking-wider">
+              {t('skills.toggle')}
+            </span>
+            <div 
+                class="relative w-12 h-7 bg-blue-950 rounded-full transition-all border border-blue-500/30 group-hover:border-blue-400" 
+                id="toggle-bg"
+            >
+              <div 
+                class="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform" 
+                id="toggle-dot"
+              ></div>
+            </div>
+          </button>
+        </div>
+
+        <div id="skills-wrapper" class="relative w-full max-w-6xl mx-auto min-h-[400px]">
+            <div 
+                id="view-bubbles" 
+                class="relative w-full flex flex-wrap justify-center content-start gap-8 transition-all duration-500 opacity-100 visible scale-100 py-10"
+            >
+                {skills[lang].map((skill, index) => (
+                    <button 
+                        class="skill-interaction-trigger group relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-[#161e2b] border border-blue-500/20 flex items-center justify-center hover:scale-110 focus:ring-4 focus:ring-blue-500/50 transition-all z-10"
+                        style={`animation: float ${4 + index % 3}s ease-in-out infinite alternate; animation-delay: ${index * 0.1}s;`}
+                    >
+                        <img 
+                            src={skill.icon} 
+                            class={`w-10 h-10 md:w-12 md:h-12 object-contain transition-opacity ${skill.name === 'Quantum' ? 'brightness-0 invert scale-[1.7] opacity-100' : 'opacity-80 group-hover:opacity-100'}`} 
+                            alt={skill.name} 
+                        />
+                        <span 
+                            class="absolute -bottom-10 opacity-0 group-hover:opacity-100 text-blue-200 text-xs font-bold bg-[#161e2b] px-3 py-1.5 rounded-lg border border-blue-500/30 whitespace-nowrap z-20 translate-y-2 group-hover:translate-y-0 transition-all"
+                        >
+                            {skill.name}
+                        </span>
+                    </button>
+                ))}
+            </div>
+        
+            <div 
+                id="view-grid" 
+                class="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500 opacity-0 invisible scale-95 pointer-events-none"
+            >
+                {skills[lang].map((skill) => (
+                    <button 
+                        class="skill-interaction-trigger text-left bg-[#161e2b] border border-blue-500/20 rounded-2xl p-6 flex flex-col gap-4 hover:border-blue-400/50 transition-colors shadow-lg group/card w-full"
+                    >
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-900/20 flex items-center justify-center border border-blue-500/10 group-hover/card:scale-110 transition-transform">
+                                <img src={skill.icon} class={`w-7 h-7 object-contain ${skill.name === 'Quantum' ? 'brightness-0 invert p-0 scale-[1.7]' : ''}`} alt={skill.name} />
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">{skill.name}</h3>
+                                <div class={`flex items-center gap-2 mt-1 text-xs font-bold uppercase tracking-wider ${getTextColor(skill.level)}`}>
+                                    <span class={`w-2 h-2 rounded-full ${getBgColor(skill.level)} shadow-[0_0_8px_currentColor]`}></span>
+                                    {getSkillLabel(skill.level)}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-blue-200/70 text-sm leading-relaxed">{skill.desc}</p>
+                    </button>
+                ))}
+            </div>
+        </div>
+
+        <div class="mt-16 flex justify-center w-full relative z-20">
+          <div class="relative group/dock flex flex-col items-center">
+              <div class="mb-3 px-3 py-1 bg-[#161e2b] text-blue-200 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full border border-blue-500/20 shadow-sm">
+                  {t('skills.env')}
+              </div>
+              <div 
+                class="px-6 py-3 rounded-2xl bg-[#161e2b] border border-blue-500/20 shadow-lg flex items-center gap-6 hover:border-blue-400/40 transition-colors"
+              >
+                  {[
+                    {n: "Bash", i: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"},
+                    {n: "Debian", i: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg"},
+                    {n: "Git", i: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"},
+                    {n: "VS Code", i: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"},
+                    {n: "WSL", i: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"}
+                  ].map(tool => (
+                    <div class="group/icon relative flex flex-col items-center transition-all duration-300 hover:-translate-y-2 cursor-pointer p-1">
+                        <div 
+                            class="absolute -top-8 opacity-0 group-hover/icon:opacity-100 px-2 py-0.5 bg-[#0f172a] border border-blue-500/30 text-white text-[9px] font-bold rounded translate-y-2 group-hover/icon:translate-y-0 whitespace-nowrap z-30 transition-all"
+                        >
+                          {tool.n}
+                        </div>
+                        <img 
+                            src={tool.i} 
+                            class="w-8 h-8 md:w-10 md:h-10 opacity-90 group-hover/icon:opacity-100 transition-opacity" 
+                            alt={tool.n} 
+                        />
+                        <div 
+                            class="w-1 h-1 bg-blue-400 rounded-full mt-1 opacity-0 group-hover/icon:opacity-100 transition-opacity"
+                        ></div>
+                    </div>
+                  ))}
+              </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<script>
+  // Bascule entre l'affichage en bulles et l'affichage en grille détaillée.
+  const initSkills = () => {
+    const toggleBtn = document.getElementById('mastery-toggle');
+    const toggleDot = document.getElementById('toggle-dot');
+    const toggleBg = document.getElementById('toggle-bg');
+    const viewBubbles = document.getElementById('view-bubbles');
+    const viewGrid = document.getElementById('view-grid');
+    let isActive = false;
+
+    const skillTriggers = document.querySelectorAll('.skill-interaction-trigger');
+    skillTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => { if (toggleBtn) toggleBtn.click(); });
+    });
+
+    if (toggleBtn && viewBubbles && viewGrid && toggleBg && toggleDot) {
+      toggleBtn.addEventListener('click', () => {
+        isActive = !isActive;
+        if (isActive) {
+          toggleDot.style.transform = window.innerWidth >= 1024 ? 'translateX(1.5rem)' : 'translateX(1.25rem)';
+          toggleBg.classList.add('bg-blue-600', 'border-blue-400');
+          toggleBg.classList.remove('bg-blue-950', 'border-blue-500/30');
+          viewBubbles.classList.add('opacity-0', 'invisible', 'scale-50', 'absolute');
+          viewBubbles.classList.remove('relative', 'opacity-100', 'visible', 'scale-100');
+          viewGrid.classList.remove('opacity-0', 'invisible', 'scale-95', 'absolute', 'pointer-events-none');
+          viewGrid.classList.add('relative', 'opacity-100', 'visible', 'scale-100');
+        } else {
+          toggleDot.style.transform = 'translateX(0)';
+          toggleBg.classList.remove('bg-blue-600', 'border-blue-400');
+          toggleBg.classList.add('bg-blue-950', 'border-blue-500/30');
+          viewGrid.classList.add('opacity-0', 'invisible', 'scale-95', 'absolute', 'pointer-events-none');
+          viewGrid.classList.remove('relative', 'opacity-100', 'visible', 'scale-100');
+          viewBubbles.classList.remove('opacity-0', 'invisible', 'scale-50', 'absolute');
+          viewBubbles.classList.add('relative', 'opacity-100', 'visible', 'scale-100');
+        }
+      });
+    }
+  };
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initSkills); } else { initSkills(); }
+</script>

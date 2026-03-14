@@ -1,0 +1,84 @@
+---
+const { item, theme } = Astro.props;
+
+const getTagClasses = (type) => {
+  const base = "px-2 py-0.5 rounded border text-xs uppercase tracking-wider font-bold";
+  if (type === "Diplôme" || type === "Degree") return `${base} bg-blue-100 text-blue-800 border-blue-300`;
+  if (type === "Formation de préparation" || type === "Preparatory Training") return `${base} bg-yellow-100 text-yellow-800 border-yellow-300`;
+  if (type === "Certification Technique" || type === "Certification") return `${base} bg-emerald-100 text-emerald-800 border-emerald-300`;
+  if (type === "Stage") return `${base} bg-indigo-100 text-indigo-800 border-indigo-300`;
+  return `${base} bg-gray-100 text-gray-800 border-gray-300`;
+};
+
+const isBlue = theme === 'blue';
+const Wrapper = item.url ? 'a' : 'div';
+
+const wrapperProps = item.url 
+    ? { 
+        href: item.url, 
+        target: "_blank", 
+        class: "ml-16 md:ml-24 w-full block bg-white p-6 md:p-8 rounded-2xl border-2 border-[#233554] shadow-[6px_6px_0px_0px_#233554] transition-all hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#233554] relative group/card" 
+      } 
+    : { 
+        class: "ml-16 md:ml-24 w-full bg-white p-6 md:p-8 rounded-2xl border-2 border-[#233554] shadow-[6px_6px_0px_0px_#233554] transition-all hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#233554] relative group/card" 
+      };
+
+const entityName = item.school || item.company;
+---
+
+<div class="relative flex items-start group">
+  
+  <div 
+    class={`absolute left-4 md:left-8 top-6 w-6 h-6 md:w-8 md:h-8 rounded-lg border-2 border-[#233554] ${isBlue ? 'bg-blue-100' : 'bg-emerald-100'} z-10 flex items-center justify-center shadow-[2px_2px_0px_0px_#233554]`}
+  >
+    <div class={`w-2 h-2 ${isBlue ? 'bg-blue-600' : 'bg-emerald-600'} rounded-full`}>
+    </div>
+  </div>
+  
+  <Wrapper {...wrapperProps}>
+    <div class="flex flex-col md:flex-row gap-6 items-start justify-between">
+      <div class="flex-grow space-y-3">
+        <span 
+            class={`inline-block text-xs font-bold text-[#233554] ${isBlue ? 'bg-blue-200' : 'bg-emerald-200'} border border-[#233554] px-3 py-1 rounded-md mb-1 shadow-[2px_2px_0px_0px_#233554]`}
+        >
+            {item.date}
+        </span>
+        
+        <h3 class="text-xl md:text-2xl font-extrabold text-[#233554] leading-tight">
+            {item.title}
+        </h3>
+        
+        <div 
+            class={`flex flex-wrap items-center gap-3 text-gray-600 font-medium ${isBlue ? 'group-hover/card:text-blue-600' : ''} transition-colors`}
+        >
+          <span class="flex items-center gap-1.5">
+            {isBlue ? (
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a2 2 0 00-2-2H7a2 2 0 00-2 2v5m4 0h2"/></svg>
+            ) : (
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            )}
+            {entityName}
+          </span>
+          <span class="hidden md:inline text-gray-400">•</span>
+          <span class={getTagClasses(item.type)}>{item.type}</span>
+        </div>
+        
+        <p class="text-gray-600 leading-relaxed mt-4 pt-4 border-t-2 border-dashed border-gray-200 text-sm md:text-base">
+          {item.desc}
+        </p>
+      </div>
+
+      {item.logo && (
+        <div 
+            class={`w-16 h-16 md:w-20 md:h-20 flex-shrink-0 p-2 bg-white rounded-xl border-2 border-[#233554] shadow-[4px_4px_0px_0px_#233554] flex items-center justify-center transition-transform ${isBlue ? 'group-hover/card:rotate-3' : 'group-hover/card:-rotate-3'}`}
+        >
+          <img 
+            src={item.logo} 
+            alt={entityName} 
+            class="w-full h-full object-contain mix-blend-multiply" 
+          />
+        </div>
+      )}
+    </div>
+  </Wrapper>
+</div>

@@ -1,0 +1,248 @@
+---
+import { useTranslations } from '../i18n/ui.js';
+
+const { lang = 'fr' } = Astro.props;
+const t = useTranslations(lang);
+---
+<section id="home" class="relative min-h-[95vh] flex items-center pt-20 overflow-hidden bg-slate-50">
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div 
+            class="absolute top-[-50%] left-[-20%] w-[80%] h-[150%] bg-gradient-to-br from-blue-100/40 via-transparent to-transparent rotate-12 blur-3xl animate-spotlight"
+        ></div>
+        <div 
+            class="absolute inset-0 opacity-20 mix-blend-overlay" 
+            style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.5%22/%3E%3C/svg%3E');"
+        ></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+      
+      <div class="flex flex-col items-start gap-6 lg:gap-8 order-2 lg:order-1">
+        
+        <div class="opacity-0 animate-fade-in-up" style="animation-delay: 0.1s;">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#233554] text-white shadow-lg border border-blue-800">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="text-[10px] md:text-xs font-bold tracking-wider uppercase">
+              {t('hero.badge.student')} 
+              <span class="text-blue-400 mx-1">•</span> 
+              {t('hero.badge.internship')}
+            </span>
+          </div>
+        </div>
+
+        <div class="opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+           <h1 class="font-serif text-5xl md:text-6xl xl:text-7xl text-[#233554] leading-tight">
+             <span class="block font-medium">{t('hero.title.1')}</span>
+             <span class="block font-bold italic text-slate-500">{t('hero.title.2')}</span>
+             <span class="block font-medium">{t('hero.title.3')}</span>
+           </h1>
+        </div>
+
+        <p 
+            class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg opacity-0 animate-fade-in-up" 
+            style="animation-delay: 0.5s;"
+            set:html={t('hero.subtitle')}
+        >
+        </p>
+
+        <div 
+            class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto opacity-0 animate-fade-in-up" 
+            style="animation-delay: 0.7s;"
+        >
+          <a 
+            href="https://github.com/lyko27" 
+            class="group px-8 py-4 bg-[#233554] text-white font-bold rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-2"
+          >
+              {t('hero.btn.works')}
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a 
+            href="/CV_Gadaix_Natéo.pdf" 
+            target="_blank" 
+            class="px-8 py-4 bg-white border border-gray-200 text-[#233554] font-bold rounded-xl hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all text-center"
+          >
+              {t('hero.btn.cv')}
+          </a>
+        </div>
+      </div>
+
+      <div 
+        id="hero-visual" 
+        class="flex justify-center order-1 lg:order-2 relative perspective-1000 opacity-0 animate-fade-in-up" 
+        style="animation-delay: 0.9s;"
+      >
+        <div class="relative w-full max-w-2xl aspect-[4/3] animate-float">
+            <div class="absolute inset-0 bg-blue-900 rounded-2xl opacity-10 blur-2xl transform translate-y-4 translate-x-4"></div>
+            <div 
+                id="code-window" 
+                class="relative h-full bg-white/90 backdrop-blur-xl border border-white/60 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            >
+                <div class="h-10 bg-slate-50 border-b border-slate-200 flex items-center px-4 gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-400/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-400/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-400/80"></div>
+                    <div class="ml-4 text-xs font-mono text-slate-500 font-bold flex-grow text-center tracking-wide">main.c</div>
+                </div>
+
+                <div class="p-6 font-mono text-sm md:text-base leading-relaxed overflow-hidden flex-grow bg-white/50 pb-16">
+                    <div class="flex gap-4">
+                        <div class="flex flex-col text-slate-300 select-none text-right font-medium pr-2 border-r border-slate-100">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                        </div>
+                        <div class="flex flex-col font-medium">
+                            <p><span class="text-[#1d4ed8] font-bold">struct</span> <span class="text-[#0f766e] font-bold">Engineer</span> <span class="text-[#334155]">&lbrace;</span></p>
+                            <p class="pl-4"><span class="text-[#1d4ed8]">char</span>* name = <span class="text-[#b45309]">"Natéo"</span>;</p>
+                            <p class="pl-4"><span class="text-[#1d4ed8]">int</span> age = <span class="text-[#0f766e]">21</span>;</p>
+                            <p class="pl-4"><span class="text-[#1d4ed8]">char</span>* school = <span class="text-[#b45309]">"ISIMA"</span>;</p>
+                            <p class="pl-4"><span class="text-[#1d4ed8]">void</span>* skills[] = <span class="text-[#334155]">&lbrace;</span></p>
+                            <p class="pl-8"><span class="text-[#475569]">C_CPP</span>, <span class="text-[#475569]">PYTHON</span>, <span class="text-[#475569]">MODELING</span></p>
+                            <p class="pl-4"><span class="text-[#334155]">&rbrace;</span>;</p>
+                            <p class="pl-4 h-6 flex items-center">
+                                <span id="typewriter-line1" class="text-slate-400 italic"></span>
+                                <span id="cursor-line1" class="w-2 h-4 bg-blue-600 inline-block ml-1 animate-pulse"></span>
+                            </p>
+                            <p><span class="text-[#334155]">&rbrace;</span>;</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div 
+                    id="terminal-window" 
+                    class="absolute bottom-0 left-0 right-0 bg-[#1e293b] font-mono text-xs md:text-sm flex flex-col transition-all duration-700 ease-in-out h-16 overflow-hidden z-20 shadow-2xl border-t border-slate-700"
+                >
+                    <div class="flex-shrink-0 flex items-center gap-6 text-slate-500 px-6 h-6 bg-[#0f172a] text-[10px] uppercase tracking-widest font-bold select-none border-b border-slate-800">
+                        <span class="text-blue-400 flex items-center gap-2">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div> 
+                            TERMINAL
+                        </span>
+                        <span>Output</span>
+                        <span>Debug</span>
+                    </div>
+                    <div class="px-5 pb-2.5 pt-1 overflow-hidden bg-[#1e293b] flex-grow flex flex-col justify-end">
+                        <div id="terminal-history" class="text-slate-400 space-y-1 mb-1"></div>
+                        <div class="flex items-center text-slate-200">
+                            <span id="prompt-prefix-arrow" class="text-emerald-400 font-bold mr-2 transition-opacity duration-300">➜</span>
+                            <span id="prompt-prefix-path" class="text-blue-400 font-bold mr-2 transition-opacity duration-300">~</span>
+                            <span id="terminal-text" class="text-white font-medium"></span>
+                            <span id="cursor-terminal" class="w-2 h-4 bg-white ml-1 opacity-0"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+  @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(2deg); } 100% { transform: translateY(0px) rotate(-2deg); } }
+  @keyframes spotlight { 0% { transform: translate(0%, 0%) rotate(12deg); opacity: 0.6; } 50% { transform: translate(10%, 5%) rotate(15deg); opacity: 0.3; } 100% { transform: translate(0%, 0%) rotate(12deg); opacity: 0.6; } }
+  .animate-spotlight { animation: spotlight 8s ease-in-out infinite alternate; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+  .blink-cursor { animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @keyframes rocket-float { 0% { transform: translate(0px, 0px); } 50% { transform: translate(2px, -3px); } 100% { transform: translate(0px, 0px); } }
+</style>
+
+<script>
+  // Animation d'écriture et de terminal séquentielle.
+  const initTerminal = () => {
+    const line1Text = "// Ready for production";
+    const elLine1 = document.getElementById('typewriter-line1');
+    const elCursor1 = document.getElementById('cursor-line1');
+    const elTerminal = document.getElementById('terminal-text');
+    const elCursorTerm = document.getElementById('cursor-terminal');
+    const elHistory = document.getElementById('terminal-history');
+    const elTerminalWindow = document.getElementById('terminal-window');
+    const elPromptArrow = document.getElementById('prompt-prefix-arrow');
+    const elPromptPath = document.getElementById('prompt-prefix-path');
+
+    if(!elLine1 || !elCursor1 || !elTerminal || !elCursorTerm || !elHistory || !elTerminalWindow) return;
+
+    const typeText = async (element, text, speed = 50) => {
+        for (let i = 0; i < text.length; i++) {
+            element.textContent += text.charAt(i);
+            await new Promise(r => setTimeout(r, speed + Math.random() * 30));
+        }
+    };
+
+    const addHistoryLine = (text, colorClass = "text-slate-400") => {
+        const div = document.createElement('div');
+        div.className = colorClass;
+        div.textContent = text;
+        elHistory.appendChild(div);
+    };
+
+    const startAnimation = async () => {
+        await new Promise(r => setTimeout(r, 1000));
+        await typeText(elLine1, line1Text, 50);
+        elCursor1.style.display = 'none';
+        await new Promise(r => setTimeout(r, 1200));
+
+        elTerminalWindow.classList.remove('h-16');
+        elTerminalWindow.classList.add('h-48');
+        await new Promise(r => setTimeout(r, 600));
+
+        elCursorTerm.classList.remove('opacity-0');
+        elCursorTerm.classList.add('blink-cursor');
+        await new Promise(r => setTimeout(r, 800));
+
+        await typeText(elTerminal, "make build", 70);
+        await new Promise(r => setTimeout(r, 500)); 
+        
+        elTerminal.textContent = ""; 
+        addHistoryLine("➜ ~ make build", "text-white font-bold");
+        
+        await new Promise(r => setTimeout(r, 600));
+        addHistoryLine("[20%] Building C object src/main.o");
+        await new Promise(r => setTimeout(r, 300));
+        addHistoryLine("[50%] Linking C executable portfolio_v1");
+        await new Promise(r => setTimeout(r, 400));
+        addHistoryLine("[100%] Built target ISIMA_Rocket", "text-emerald-400 font-bold");
+        
+        await new Promise(r => setTimeout(r, 300));
+        addHistoryLine("> Huston ici Astro, prêt au décollage.", "text-orange-300");
+
+        await new Promise(r => setTimeout(r, 2000));
+        await typeText(elTerminal, "./deploy_portfolio.sh", 50);
+        await new Promise(r => setTimeout(r, 600));
+        
+        elTerminal.textContent = "";
+        addHistoryLine("➜ ~ ./deploy_portfolio.sh", "text-white font-bold");
+        await new Promise(r => setTimeout(r, 800));
+        
+        elTerminalWindow.classList.remove('h-48');
+        elTerminalWindow.classList.add('h-16');
+
+        await new Promise(r => setTimeout(r, 500));
+        elHistory.innerHTML = '';
+
+        if(elPromptArrow) elPromptArrow.classList.add('hidden');
+        if(elPromptPath) elPromptPath.classList.add('hidden');
+        
+        await new Promise(r => setTimeout(r, 300));
+        
+        elTerminal.classList.add('text-orange-300');
+        await typeText(elTerminal, "> Système lancé... Décollage ! ", 50);
+        
+        const rocketSpan = document.createElement('span');
+        rocketSpan.innerHTML = "🚀";
+        rocketSpan.style.display = "inline-block";
+        rocketSpan.style.animation = "rocket-float 2s ease-in-out infinite";
+        elTerminal.appendChild(rocketSpan);
+    };
+
+    startAnimation();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTerminal);
+  } else {
+    initTerminal();
+  }
+</script>

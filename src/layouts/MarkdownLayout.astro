@@ -1,0 +1,63 @@
+---
+import BaseLayout from './baseLayouts.astro';
+
+const { frontmatter } = Astro.props;
+const lang = frontmatter.lang || 'fr';
+const backUrl = lang === 'fr' ? '/fr/#projets' : '/en/#projets';
+const backText = lang === 'fr' ? 'Retour aux projets' : 'Back to projects';
+---
+
+<BaseLayout title={`${frontmatter.title} - Natéo Gadaix`} lang={lang}>
+  <section class="min-h-screen pt-32 pb-20 px-6 md:px-12 bg-slate-50 relative overflow-hidden">
+    
+    <div class="absolute inset-0 pointer-events-none opacity-60 z-0" 
+         style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+      <a 
+        href={backUrl} 
+        class="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-[#233554] text-[#233554] font-bold rounded-lg shadow-[4px_4px_0px_0px_#233554] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all mb-10 uppercase tracking-wider text-xs"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        {backText}
+      </a>
+
+      <div style="filter: drop-shadow(8px 8px 0px #233554);">
+        <div class="bg-white border-2 border-b-0 border-[#233554] rounded-t-2xl p-8 md:p-12 relative z-10">
+          <article class="markdown-content">
+            <slot />
+          </article>
+        </div>
+        
+        <svg width="100%" height="20" class="block relative z-0">
+          <defs>
+            <pattern id="teeth" x="0" y="0" width="24" height="20" patternUnits="userSpaceOnUse">
+              <path d="M0,0 L12,16 L24,0" fill="white" stroke="#233554" stroke-width="2.5" stroke-linejoin="miter" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="100%" height="20" fill="url(#teeth)" />
+        </svg>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .markdown-content { color: #334155; line-height: 1.8; font-size: 1.05rem; }
+  .markdown-content h1 { font-size: 2.5rem; font-weight: 800; color: #233554; margin-bottom: 1.5rem; line-height: 1.2; }
+  .markdown-content h2 { font-size: 1.75rem; font-weight: 700; color: #233554; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px dashed #cbd5e1; }
+  .markdown-content h3 { font-size: 1.35rem; font-weight: 700; color: #1e3a8a; margin-top: 2rem; margin-bottom: 1rem; }
+  .markdown-content p { margin-bottom: 1.25rem; }
+  .markdown-content a { color: #2563eb; font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color 0.2s; }
+  .markdown-content a:hover { border-color: #2563eb; }
+  .markdown-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; }
+  .markdown-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; }
+  .markdown-content li { margin-bottom: 0.5rem; }
+  .markdown-content strong { color: #0f172a; font-weight: 700; }
+  .markdown-content blockquote { border-left: 4px solid #3b82f6; background-color: #eff6ff; padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; color: #1e3a8a; }
+  .markdown-content code:not(pre code) { background-color: #f1f5f9; color: #059669; font-family: monospace; font-size: 0.9em; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-weight: 600; border: 1px solid #e2e8f0; }
+  .markdown-content pre { background-color: #1e293b; color: #f8fafc; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1.5rem; border: 2px solid #0f172a; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
+  .markdown-content pre code { font-family: monospace; font-size: 0.9rem; background: none; border: none; padding: 0; color: inherit; }
+  .markdown-content img { max-width: 100%; height: auto; border-radius: 0.75rem; border: 2px solid #233554; margin: 1.5rem 0; box-shadow: 4px 4px 0px 0px #233554; }
+</style>

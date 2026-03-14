@@ -1,0 +1,202 @@
+---
+const { title, lang = 'fr' } = Astro.props;
+import '../styles/global.css'; 
+import { useTranslations } from '../i18n/ui.js';
+
+const t = useTranslations(lang);
+const nextLangUrl = lang === 'fr' ? '/en' : '/fr';
+const langLabel = lang === 'fr' ? 'EN' : 'FR';
+const flagUrl = lang === 'fr' ? 'https://flagcdn.com/w80/gb.png' : 'https://flagcdn.com/w80/fr.png';
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  
+  <body class="bg-gray-50 text-slate-800 font-body antialiased overflow-x-hidden relative">
+    
+    <header class="absolute top-0 left-0 w-full z-50 py-6 px-6 md:px-12 transition-all duration-300">
+      <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+        <a 
+          id="smart-logo" 
+          href="#home" 
+          class="logo-base text-2xl font-bold text-[#233554] tracking-tight z-50"
+        >
+          &lt; Natéo /&gt;
+        </a>
+        
+        <nav 
+          id="smart-nav" 
+          class="nav-base flex items-center gap-4 md:gap-6 z-50"
+        >
+          <div class="hidden md:flex gap-4 font-medium text-sm">
+            <a href={`/${lang}/#home`} class="nav-link nav-active">{t('nav.home')}</a>
+            <a href={`/${lang}/#parcours`} class="nav-link">{t('nav.parcours')}</a>
+            <a href={`/${lang}/#skills`} class="nav-link">{t('nav.skills')}</a>
+            <a href={`/${lang}/#projets`} class="nav-link">{t('nav.projects')}</a>
+            <a href={`/${lang}/#contact`} class="nav-link">{t('nav.contact')}</a>
+            <a href={`/${lang}/journal`} class="nav-link">{t('nav.journal')}</a>
+          </div>
+          <a 
+            href={nextLangUrl} 
+            class="relative group font-bold text-xs border-2 border-[#233554] text-[#233554] px-3 py-1 rounded overflow-hidden transition-all hover:border-transparent"
+          >
+            <span class="relative z-10 group-hover:opacity-0 transition-opacity">{langLabel}</span>
+            <div class="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={`background-image: url('${flagUrl}')`}></div>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative z-10">
+      <slot /> 
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  .font-body { font-family: 'Poppins', sans-serif; }
+  
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f9fafb; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+  .nav-link {
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    color: #4b5563;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+  }
+  
+  .nav-link:hover { color: #233554; }
+
+  .nav-active {
+    background-color: #FFFF00;
+    color: #0f172a !important;
+    box-shadow: 5px 5px 0px 0px #022c22; 
+    transform: translate(-2px, -2px);
+  }
+
+  .nav-base, .logo-base {
+    position: relative;
+    padding: 10px 20px;
+    border: 1px solid transparent; 
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 9999px;
+  }
+
+  .nav-base { transform-origin: top right; right: 0; }
+  .logo-base { transform-origin: top left; left: 0; }
+
+  .logo-bubble, .nav-scroll {
+    position: fixed !important;
+    top: 25px; 
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+  }
+
+  .logo-bubble {
+    left: 30px; 
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem; 
+  }
+  
+  .logo-bubble:hover {
+    transform: scale(1.05);
+    color: #2563eb;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  }
+
+  .nav-scroll {
+    right: 30px;
+    transform: scale(0.9); 
+    padding: 0.5rem 1.5rem; 
+  }
+
+  .nav-scroll:hover {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .nav-scroll .nav-link:hover {
+    color: #2563eb; 
+  }
+
+  .nav-scroll .nav-active:hover {
+    color: #0f172a !important;
+  }
+</style>
+
+<script>
+  // Gestion de la navigation au scroll et surbrillance du menu actif.
+  document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.getElementById('smart-logo');
+    const nav = document.getElementById('smart-nav');
+    
+    if (logo && nav) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          logo.classList.add('logo-bubble');
+          nav.classList.add('nav-scroll');
+        } else {
+          logo.classList.remove('logo-bubble');
+          nav.classList.remove('nav-scroll');
+        }
+      });
+    }
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (sections.length > 0 && navLinks.length > 0) {
+      const setActiveLink = (targetId) => {
+        navLinks.forEach(link => {
+          link.classList.remove('nav-active');
+          const href = link.getAttribute('href');
+          if (href && targetId && href.includes(targetId)) {
+            link.classList.add('nav-active');
+          }
+        });
+      };
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          const href = link.getAttribute('href');
+          if (!href) return;
+          setActiveLink(href.substring(1));
+        });
+      });
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        if (window.scrollY < 100) { setActiveLink('home'); return; }
+        
+        sections.forEach(section => {
+          if (!section) return;
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+            const id = section.getAttribute('id');
+            if (id) current = id;
+          }
+        });
+        if (current) setActiveLink(current);
+      });
+    }
+  });
+</script>
