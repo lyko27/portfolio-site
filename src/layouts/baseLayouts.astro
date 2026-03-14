@@ -4,7 +4,8 @@ import '../styles/global.css';
 import { useTranslations } from '../i18n/ui.js';
 
 const t = useTranslations(lang);
-const nextLangUrl = lang === 'fr' ? '/en' : '/fr';
+const otherLang = lang === 'fr' ? 'en' : 'fr';
+const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
 const langLabel = lang === 'fr' ? 'EN' : 'FR';
 const flagUrl = lang === 'fr' ? 'https://flagcdn.com/w80/gb.png' : 'https://flagcdn.com/w80/fr.png';
 ---
@@ -26,7 +27,7 @@ const flagUrl = lang === 'fr' ? 'https://flagcdn.com/w80/gb.png' : 'https://flag
       <div class="max-w-7xl mx-auto flex justify-between items-center relative">
         <a 
           id="smart-logo" 
-          href="#home" 
+          href={`${import.meta.env.BASE_URL}${lang}/`} 
           class="logo-base text-2xl font-bold text-[#233554] tracking-tight z-50"
         >
           &lt; Natéo /&gt;
@@ -37,15 +38,15 @@ const flagUrl = lang === 'fr' ? 'https://flagcdn.com/w80/gb.png' : 'https://flag
           class="nav-base flex items-center gap-4 md:gap-6 z-50"
         >
           <div class="hidden md:flex gap-4 font-medium text-sm">
-            <a href={`/${lang}/#home`} class="nav-link nav-active">{t('nav.home')}</a>
-            <a href={`/${lang}/#parcours`} class="nav-link">{t('nav.parcours')}</a>
-            <a href={`/${lang}/#skills`} class="nav-link">{t('nav.skills')}</a>
-            <a href={`/${lang}/#projets`} class="nav-link">{t('nav.projects')}</a>
-            <a href={`/${lang}/#contact`} class="nav-link">{t('nav.contact')}</a>
-            <a href={`/${lang}/journal`} class="nav-link">{t('nav.journal')}</a>
+            <a href={`${import.meta.env.BASE_URL}${lang}/#home`} class="nav-link nav-active">{t('nav.home')}</a>
+            <a href={`${import.meta.env.BASE_URL}${lang}/#parcours`} class="nav-link">{t('nav.parcours')}</a>
+            <a href={`${import.meta.env.BASE_URL}${lang}/#skills`} class="nav-link">{t('nav.skills')}</a>
+            <a href={`${import.meta.env.BASE_URL}${lang}/#projets`} class="nav-link">{t('nav.projects')}</a>
+            <a href={`${import.meta.env.BASE_URL}${lang}/#contact`} class="nav-link">{t('nav.contact')}</a>
+            <a href={`${import.meta.env.BASE_URL}${lang}/journal/`} class="nav-link">{t('nav.journal')}</a>
           </div>
           <a 
-            href={nextLangUrl} 
+            href={otherLangUrl} 
             class="relative group font-bold text-xs border-2 border-[#233554] text-[#233554] px-3 py-1 rounded overflow-hidden transition-all hover:border-transparent"
           >
             <span class="relative z-10 group-hover:opacity-0 transition-opacity">{langLabel}</span>

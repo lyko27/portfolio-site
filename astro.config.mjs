@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://perso.isima.fr',
   base: '/~nagadaix',
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()]
   },

@@ -3,7 +3,7 @@ import BaseLayout from './baseLayouts.astro';
 
 const { frontmatter } = Astro.props;
 const lang = frontmatter.lang || 'fr';
-const backUrl = lang === 'fr' ? '/fr/#projets' : '/en/#projets';
+const backUrl = lang === 'fr' ? `${import.meta.env.BASE_URL}fr/#projets` : `${import.meta.env.BASE_URL}en/#projets`;
 const backText = lang === 'fr' ? 'Retour aux projets' : 'Back to projects';
 ---
 

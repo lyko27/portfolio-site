@@ -1,19 +1,8 @@
 ---
-// Redirection statique vers l'accueil
 ---
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=/fr/" />
-    <title>Redirection</title>
-    <script>
-      window.location.replace('/fr/');
-    </script>
-    <style>
-      body { visibility: hidden; background-color: #f8fafc; }
-    </style>
+    <meta http-equiv="refresh" content={`0;url=${import.meta.env.BASE_URL}fr/`} />
   </head>
-  <body>
-  </body>
 </html>

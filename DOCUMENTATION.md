@@ -68,7 +68,7 @@ J'ai utilisé l'API moderne `navigator.clipboard.writeText()` couplée à des `s
 Pour maintenir le projet proprement, je m'applique ces règles d'ingénierie logicielle :
 - **Lisibilité :** Mon code est aéré. Je reviens à la ligne sur les attributs trop longs (HTML/Tailwind) pour permettre une lecture facile sans scroll horizontal.
 - **Commentaires :** Factuels, courts, rédigés à la première personne. Pas de pavés inutiles.
-- **Ajouter un projet :** Éditer `src/data/portfolio.js` (tableau `projects`). La clé `doc` doit pointer vers la route du futur fichier Markdown (ex: `/fr/projets/mon-nouveau-projet`).
+- **Ajouter un projet :** Éditer `src/data/portfolio.js` (tableau `projects`). La clé `doc` doit pointer vers la route du futur fichier Markdown en utilisant la variable d'environnement base et en ajoutant un slash final (ex: `import.meta.env.BASE_URL + "fr/projets/mon-nouveau-projet/"`).
 - **Rédiger une documentation projet :** Les routes de documentation seront gérées par Astro en créant simplement un fichier dans `src/pages/fr/projets/nom-du-projet.md`. Le rendu utilise `MarkdownLayout.astro`, qui intègre automatiquement à la fin de l'article un effet visuel "ticket de caisse" des dents
 comme si il était dechiré.
 - **Modifier une compétence :** Éditer le tableau `skills`. Les couleurs s'adapteront automatiquement grâce à l'helper basé sur le score (la clé `level`).

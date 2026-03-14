@@ -9,7 +9,7 @@ export const educationEvents = {
       school: "Clermont-Auvergne INP - ISIMA",
       type: "Diplôme",
       desc: "Actuellement en 1ère année de diplôme d'ingénieur en informatique. Formation approfondie en informatique, modélisation mathématique et architectures logicielles. Projets pratiques et travail en équipe.",
-      logo: "/logo_isima.png",
+      logo: import.meta.env.BASE_URL + "logo_isima.png",
       url: "https://www.isima.fr"
     },
     {
@@ -18,7 +18,7 @@ export const educationEvents = {
       school: "Lycée Alphonse Daudet Nîmes",
       type: "Formation de préparation",
       desc: "Filière Physique et Science de l'ingénieur (PSI). Deux années de formation intensive en mathématiques, physique et sciences industrielles, préparant aux concours d'entrée des grandes écoles d'ingénieurs. Développement de la rigueur et de la capacité de travail.",
-      logo: "/psi.png",
+      logo: import.meta.env.BASE_URL + "psi.png",
       url: "https://alphonse-daudet-nimes.mon-ent-occitanie.fr/cpge/"
     },
     {
@@ -27,7 +27,7 @@ export const educationEvents = {
       school: "Lycée Louis Feuillade",
       type: "Diplôme",
       desc: "Obtenu avec Mention Bien. Spécialités Mathématiques et Physique-Chimie.",
-      logo: "/louis.jpg",
+      logo: import.meta.env.BASE_URL + "louis.jpg",
       url: "https://louis-feuillade.mon-ent-occitanie.fr/"
     }
   ],
@@ -38,7 +38,7 @@ export const educationEvents = {
       school: "Clermont-Auvergne INP - ISIMA",
       type: "Degree",
       desc: "Currently in 1st year of computer engineering degree. In-depth training in computer science, mathematical modeling, and software architectures. Practical projects and teamwork.",
-      logo: "/logo_isima.png",
+      logo: import.meta.env.BASE_URL + "logo_isima.png",
       url: "https://www.isima.fr"
     },
     {
@@ -47,7 +47,7 @@ export const educationEvents = {
       school: "Alphonse Daudet High School Nîmes",
       type: "Preparatory Training",
       desc: "Physics and Engineering Science (PSI). Two years of intensive training in mathematics, physics, and industrial sciences, preparing for competitive entrance exams to engineering schools. Development of rigor and work capacity.",
-      logo: "/psi.png",
+      logo: import.meta.env.BASE_URL + "psi.png",
       url: "https://alphonse-daudet-nimes.mon-ent-occitanie.fr/cpge/"
     },
     {
@@ -56,7 +56,7 @@ export const educationEvents = {
       school: "Louis Feuillade High School",
       type: "Degree",
       desc: "Graduated with Honors. Specializing in Mathematics and Physics-Chemistry.",
-      logo: "/louis.jpg",
+      logo: import.meta.env.BASE_URL + "louis.jpg",
       url: "https://louis-feuillade.mon-ent-occitanie.fr/"
     }
   ]
@@ -70,7 +70,7 @@ export const experienceEvents = {
       company: "ISIMA - Borchum University",
       type: "Certification",
       desc: "Séminaire d'initiation à la logistique de production et l'optimisation des flux. Compréhension des enjeux d'optimisation d'une chaîne de production.",
-      logo: "/bo.jpg"
+      logo: import.meta.env.BASE_URL + "bo.jpg"
     }
   ],
   en: [
@@ -80,7 +80,7 @@ export const experienceEvents = {
       company: "ISIMA - Borchum University",
       type: "Certification",
       desc: "Introductory seminar to production logistics and flow optimization. Understanding the challenges of optimizing a production chain.",
-      logo: "/bo.jpg"
+      logo: import.meta.env.BASE_URL + "bo.jpg"
     }
   ]
 };
@@ -114,7 +114,7 @@ export const projects = {
       desc: "Site vitrine conçu avec Astro et Tailwind CSS. Animations fluides sans framework JS lourd.",
       tags: ["Astro", "Tailwind", "Web"],
       repo: "https://github.com/lyko27/portfolio-site",
-      doc: "/fr/projets/portfolio",
+      doc: import.meta.env.BASE_URL + "fr/projets/portfolio/",
       color: "bg-green-50"
     }
   ],
@@ -125,7 +125,7 @@ export const projects = {
       desc: "Showcase site built with Astro and Tailwind CSS. Smooth animations without heavy JS frameworks.",
       tags: ["Astro", "Tailwind", "Web"],
       repo: "https://github.com/lyko27/portfolio-site",
-      doc: "/en/projets/portfolio",
+      doc: import.meta.env.BASE_URL + "en/projets/portfolio/",
       color: "bg-green-50"
     }
   ]
